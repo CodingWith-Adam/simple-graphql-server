@@ -8,6 +8,8 @@ const typeDefs = gql`
   type Query {
     greeting: String
     movies: [Movie!]
+    movie(id: ID!): Movie!
+    productionCompanies: [ProductionCompany]
   }
 
   type Movie {
@@ -51,6 +53,8 @@ const resolvers = {
     movies: () => {
       return movies;
     },
+    movie: (_root, args) => movies.find((x) => x.id == args.id),
+    productionCompanies: () => productionCompanies,
   },
   Movie: {
     productionCompany: (movie) => {
